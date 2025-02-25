@@ -1,7 +1,6 @@
 //Hecho por Daniel Enrique Flores Lino
 import javax.swing.JOptionPane;
 import java.time.Year;
-import java.util.Date;
 
 public class Ejercicio1 {
     public static void main(String[] args) {
@@ -62,7 +61,7 @@ public class Ejercicio1 {
         if (year - añoFab >= 10 && year - añoFab <= 15) {
             percentImpuesto = 16;
         }
-        else if (year - añoFab >= 5 && year - añoFab <= 9) {
+        else if (year - añoFab >= 5) {
             percentImpuesto = 13;
         }
         else {
