@@ -1,2 +1,2 @@
-# Guia1-DSS
+# Guia1-POO
 Ejercicios para la materia de DSS
