@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+//Kevin Humberto MMadridd Patzan
+//27/02/2025 (actualizado)
+
 public class PagoHorasExtras {
 
     public static void main(String[] args) {
@@ -20,30 +23,66 @@ public class PagoHorasExtras {
         for (int i = 0; i < numEmpleados; i++) {
             System.out.println("\nEmpleado #" + (i + 1));
 
-            // Solicitar datos del empleado
-            System.out.print("Ingrese el nombre del empleado: ");
-            String nombre = scanner.nextLine();
+            // Solicitar y validar el nombre del empleado
+            String nombre = "";
+            while (nombre.trim().isEmpty() || !nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\\s]+")) {
+                System.out.print("Ingrese el nombre del empleado (solo letras y espacios): ");
+                nombre = scanner.nextLine();
+                if (nombre.trim().isEmpty()) {
+                    System.out.println("¡Error! El nombre no puede estar vacío.");
+                } else if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\\s]+")) {
+                    System.out.println("¡Error! El nombre solo puede contener letras y espacios.");
+                }
+            }
 
-            System.out.print("Ingrese el salario del empleado: ");
-            double salario = scanner.nextDouble();
-            scanner.nextLine();  // Consumir el salto de línea
+            // Validar que el salario sea un número positivo
+            double salario = -1;
+            while (salario < 0) {
+                System.out.print("Ingrese el salario del empleado (debe ser un número positivo): ");
+                if (scanner.hasNextDouble()) {
+                    salario = scanner.nextDouble();
+                    if (salario < 0) {
+                        System.out.println("¡Error! El salario debe ser un número positivo.");
+                    }
+                } else {
+                    System.out.println("¡Error! Debe ingresar un número válido.");
+                    scanner.next();  // Limpiar el buffer del scanner
+                }
+                scanner.nextLine();  // Consumir el salto de línea
+            }
 
-            System.out.print("Ingrese el departamento (Gerencia, Auditoria, Tecnologia, Contabilidad): ");
-            String departamento = scanner.nextLine();
+            // Validar que el departamento sea uno de los permitidos
+            String departamento = "";
+            while (true) {
+                System.out.print("Ingrese el departamento (Gerencia, Auditoria, Tecnologia, Contabilidad): ");
+                departamento = scanner.nextLine().toLowerCase();
+                if (departamento.equals("gerencia") || departamento.equals("auditoria") || 
+                    departamento.equals("tecnologia") || departamento.equals("contabilidad")) {
+                    break;
+                } else {
+                    System.out.println("¡Error! Departamento no válido.");
+                }
+            }
 
-            System.out.print("Ingrese las horas realizadas en el mes (máximo 20 horas extras): ");
-            int horasExtras = scanner.nextInt();
-            scanner.nextLine();  // Consumir el salto de línea
-
-            // Validar que las horas extras no excedan las 20 horas
-            if (horasExtras > 20) {
-                System.out.println("¡Error! El máximo de horas extras es 20.");
-                continue;  // Salir de este ciclo y pasar al siguiente empleado
+            // Validar que las horas extras sean un número entero positivo y no excedan las 20 horas
+            int horasExtras = -1;
+            while (horasExtras < 0 || horasExtras > 20) {
+                System.out.print("Ingrese las horas realizadas en el mes (máximo 20 horas extras): ");
+                if (scanner.hasNextInt()) {
+                    horasExtras = scanner.nextInt();
+                    if (horasExtras < 0 || horasExtras > 20) {
+                        System.out.println("¡Error! Las horas extras deben estar entre 0 y 20.");
+                    }
+                } else {
+                    System.out.println("¡Error! Debe ingresar un número entero válido.");
+                    scanner.next();  // Limpiar el buffer del scanner
+                }
+                scanner.nextLine();  // Consumir el salto de línea
             }
 
             // Determinar el bono por hora según el departamento
             double bonoPorHora = 0;
-            switch (departamento.toLowerCase()) {
+            switch (departamento) {
                 case "gerencia":
                     bonoPorHora = bonoGerencia;
                     break;
@@ -56,9 +95,6 @@ public class PagoHorasExtras {
                 case "contabilidad":
                     bonoPorHora = bonoContabilidad;
                     break;
-                default:
-                    System.out.println("¡Error! Departamento no válido.");
-                    continue;
             }
 
             // Calcular el pago de horas extras
