@@ -30,8 +30,19 @@ public class Ejercicio1 {
                     "Ingrese la marca del vehículo\nError: este campo no puede estar vacío", "Marca", JOptionPane.ERROR_MESSAGE);
         }
 
-        costoInicial = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el costo del vehículo ($)",
-                "Costo inicial", JOptionPane.QUESTION_MESSAGE));
+        do {
+            try {
+                costoInicial = Double.parseDouble(JOptionPane.showInputDialog(null,
+                        "Ingrese el costo del vehículo ($)", "Costo inicial", JOptionPane.QUESTION_MESSAGE));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un costo numérico", "Error", JOptionPane.ERROR_MESSAGE);
+                costoInicial = 0;
+                continue;
+            }
+            if (costoInicial <= 0) {
+                JOptionPane.showMessageDialog(null, "El costo debe ser mayor a $0.00", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } while (costoInicial <= 0);
 
         seleccion = JOptionPane.showOptionDialog(null, "Seleccione el origen del vehículo", "Origen",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcionesOrigen, opcionesOrigen[0]);

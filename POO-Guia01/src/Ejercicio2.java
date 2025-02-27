@@ -17,7 +17,7 @@ public class Ejercicio2 {
                 peso = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el peso del paquete(kg)"));
             }
             catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad numérica", "Error", JOptionPane.ERROR_MESSAGE);
                 peso = 0;
                 continue;
             }
@@ -31,7 +31,7 @@ public class Ejercicio2 {
                 distancia = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la distancia de envío(km)"));
             }
             catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad numérica", "Error", JOptionPane.ERROR_MESSAGE);
                 distancia = 0;
                 continue;
             }
