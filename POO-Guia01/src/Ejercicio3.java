@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+//Creado por Christian Javier Rosales Palacios
+//28/02/25
+
 public class Ejercicio3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
